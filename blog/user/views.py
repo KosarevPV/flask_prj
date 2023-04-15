@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from werkzeug.exceptions import NotFound
 
 user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
 
@@ -12,4 +13,8 @@ def user_list():
 
 @user.route('/<int:pk>')
 def get_user(pk: int):
-    return f'Hello user {pk}'
+    try:
+        user_name = USERS[pk]
+    except KeyError:
+        raise NotFound(f'Users id {pk} not found')
+    return render_template('user/details.html',user_name=user_name)

@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template
 from werkzeug.exceptions import NotFound
 
-from blog.user.views import USERS
 
 post = Blueprint('post', __name__, url_prefix='/posts', static_folder='../static')
+
+USERS = {}
 
 POSTS = {
     1: {

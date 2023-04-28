@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from dotenv import load_dotenv
+from flask_migrate import Migrate
 
 from blog.user.views import user
 from blog.post.views import post
@@ -11,6 +12,8 @@ from blog.models.database import db
 
 def create_app() -> Flask:
     app = Flask(__name__)
+
+    migrate = Migrate(app, db, compare_type=True)
 
     load_dotenv()
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")

@@ -19,6 +19,8 @@ def create_app() -> Flask:
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+    app.config["WTF_CSRF_ENABLED"] = os.getenv("WTF_CSRF_ENABLED")
+
     db.init_app(app)
 
     register_blueprints(app)

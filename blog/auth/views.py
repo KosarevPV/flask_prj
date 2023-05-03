@@ -7,7 +7,7 @@ from blog.models.database import db
 from blog.forms.user import RegistrationForm, LoginForm
 from blog.models import User
 
-auth = Blueprint("auth", __name__)
+auth = Blueprint("auth", __name__, url_prefix='/auth')
 
 login_manager = LoginManager()
 login_manager.login_view = "auth.login"
@@ -26,7 +26,7 @@ def unauthorized():
 @auth.route("/login/", methods=["GET", "POST"], endpoint="login")
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("post.post_list"))
+        return redirect(url_for("post.list"))
 
     error = None
     form = LoginForm(request.form)
@@ -35,7 +35,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Login success')
-            return redirect(url_for("post.post_list"))
+            return redirect(url_for("post.list"))
 
         form.email.errors.append("Check your login details!")
         form.password.errors.append("Check your login details!")
@@ -47,7 +47,7 @@ def login():
 @auth.route("/register/", methods=["GET", "POST"], endpoint="register")
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("post.post_list"))
+        return redirect(url_for("post.list"))
     error = None
     form = RegistrationForm(request.form)
     if request.method == "POST" and form.validate_on_submit():
@@ -75,7 +75,7 @@ def register():
         else:
             current_app.logger.info("Created user %s", user)
             login_user(user)
-            return redirect(url_for("post.post_list"))
+            return redirect(url_for("post.list"))
     return render_template("auth/register.html", form=form, error=error)
 
 
@@ -83,7 +83,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("post.post_list"))
+    return redirect(url_for("post.list"))
 
 
 @auth.route("/secret/")

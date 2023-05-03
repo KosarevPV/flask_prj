@@ -7,19 +7,24 @@ Post list
 {% block body %}
 <div class="row">
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert alert-success" role="alert">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
     {% endwith %}
+
     <div class="col">
-        {% for post_id in posts %}
-        <div>
-            <a href="{{url_for('post.get_post', pk=post_id)}}">{{ posts[post_id]['text'] }}</a>
-            <p>Автор: {{ users[posts[post_id]['author']] }}</p>
-        </div>
-        {% endfor %}
+        <ul>
+            {% for post in posts %}
+            <li>
+                <a href="{{url_for('post.details', post_id=post.id)}}">{{ post.title }}</a>
+                by {{ post.author.user.username }}
+            </li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <a href="{{ url_for('post.create') }}">Create new</a>
     </div>
 </div>
 

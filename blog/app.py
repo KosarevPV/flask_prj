@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 from blog.user.views import user
 from blog.post.views import post
+from blog.authors.views import authors
 from blog.auth.views import auth, login_manager
 from blog.models.database import db
 
@@ -31,4 +32,5 @@ def create_app() -> Flask:
 def register_blueprints(app: Flask):
     app.register_blueprint(user)
     app.register_blueprint(post)
+    app.register_blueprint(authors)
     app.register_blueprint(auth)

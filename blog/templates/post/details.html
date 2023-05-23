@@ -10,5 +10,8 @@ Article #{{ post.id }}: {{ post.title }}
         <p>{{ post.body }}</p>
         <div>Published {{ post.dt_created }}</div>
         <div>by {{ post.author.user.username }}</div>
+        {% for tag in post.tags %}
+            <span> {{ tag.name }}</span>
+        {% endfor %}
     </div>
 {% endblock %}

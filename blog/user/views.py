@@ -3,7 +3,7 @@ from werkzeug.exceptions import NotFound
 
 from blog.models import User
 
-user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
+user = Blueprint('users', __name__, url_prefix='/users', static_folder='../static')
 
 
 @user.route('/', endpoint="list")

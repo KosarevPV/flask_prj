@@ -8,7 +8,7 @@ from blog.models.database import db
 from blog.models import Post, Author, Tag
 from blog.forms.post import CreatePostForm
 
-post = Blueprint('post', __name__, url_prefix='/posts', static_folder='../static')
+post = Blueprint('posts', __name__, url_prefix='/posts', static_folder='../static')
 
 
 @post.route('/', endpoint="list")

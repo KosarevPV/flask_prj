@@ -10,7 +10,7 @@ Author list
         <h1>Authors:</h1>
         {% for author in authors %}
         <ul>
-            <li><a href="{{ url_for('user.details', user_id=author.user_id) }}">{{ author.user.username }}</a></li>
+            <li><a href="{{ url_for('users.details', user_id=author.user_id) }}">{{ author.user.username }}</a></li>
         </ul>
 
         {% endfor %}

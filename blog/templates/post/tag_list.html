@@ -18,7 +18,7 @@ Tag list
         <ul>
             {% for tag in tags %}
             <li>
-                <a href="{{url_for('post.tags_details', tag_id=tag.id)}}">{{ tag.name }}</a>
+                <a href="{{url_for('posts.tags_details', tag_id=tag.id)}}">{{ tag.name }}</a>
             </li>
             {% endfor %}
         </ul>

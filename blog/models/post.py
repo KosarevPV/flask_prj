@@ -16,3 +16,6 @@ class Post(db.Model):
 
     author = relationship("Author", back_populates="post")
     tags = relationship("Tag", secondary=post_tag_association_table, back_populates="post")
+
+    def __str__(self):
+        return self.title

@@ -9,6 +9,7 @@ from blog.post.views import post
 from blog.authors.views import authors
 from blog.auth.views import auth, login_manager
 from blog.models.database import db
+from blog.admin import admin
 
 
 def create_app() -> Flask:
@@ -21,8 +22,10 @@ def create_app() -> Flask:
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["WTF_CSRF_ENABLED"] = os.getenv("WTF_CSRF_ENABLED")
+    app.config["FLASK_ADMIN_SWATCH"] = os.getenv("FLASK_ADMIN_SWATCH")
 
     db.init_app(app)
+    admin.init_app(app)
 
     register_blueprints(app)
     login_manager.init_app(app)

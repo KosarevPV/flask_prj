@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{{ url_for('user.list') }}">Users</a>
+          <a class="nav-link" aria-current="page" href="{{ url_for('users.list') }}">Users</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{ url_for('authors.list') }}">Authors</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('post.list') }}">Posts</a>
+          <a class="nav-link" href="{{ url_for('posts.list') }}">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('post.tag_list') }}">Tags</a>
+          <a class="nav-link" href="{{ url_for('posts.tag_list') }}">Tags</a>
         </li>
         {% if current_user.is_authenticated %}
           <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>

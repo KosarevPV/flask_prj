@@ -52,7 +52,7 @@ def create_post():
             current_app.logger.exception("Could not create a new article!")
             error = "Could not create article!"
         else:
-            return redirect(url_for("post.details", post_id=post.id))
+            return redirect(url_for("posts.details", post_id=post.id))
 
     return render_template("post/create.html", form=form, error=error)
 

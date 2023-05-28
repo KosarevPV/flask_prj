@@ -10,6 +10,7 @@ from blog.authors.views import authors
 from blog.auth.views import auth, login_manager
 from blog.models.database import db
 from blog.admin import admin
+from blog.api import init_api
 
 
 def create_app() -> Flask:
@@ -23,9 +24,13 @@ def create_app() -> Flask:
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["WTF_CSRF_ENABLED"] = os.getenv("WTF_CSRF_ENABLED")
     app.config["FLASK_ADMIN_SWATCH"] = os.getenv("FLASK_ADMIN_SWATCH")
+    app.config["OPENAPI_URL_PREFIX"] = os.getenv("OPENAPI_URL_PREFIX")
+    app.config["OPENAPI_SWAGGER_UI_PATH"] = os.getenv("OPENAPI_SWAGGER_UI_PATH")
+    app.config["OPENAPI_SWAGGER_UI_VERSION"] = os.getenv("OPENAPI_SWAGGER_UI_VERSION")
 
     db.init_app(app)
     admin.init_app(app)
+    api = init_api(app)
 
     register_blueprints(app)
     login_manager.init_app(app)

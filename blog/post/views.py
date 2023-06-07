@@ -1,3 +1,4 @@
+import requests
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
@@ -17,12 +18,20 @@ def post_list():
     return render_template('post/list.html', posts=posts)
 
 
+@post.route('/apipost/', endpoint="listapi")
+def post_list():
+    data = requests.get(
+        'http://127.0.0.1:5000/api/posts/?include=author%2Ctags&page%5Bnumber%5D=1&page%5Bsize%5D=10').text
+    return render_template('post/list_api.html', data=data)
+
+
 @post.route('/<int:post_id>/', endpoint="details")
 def post_details(post_id: int):
     post = Post.query.filter_by(id=post_id).options(joinedload(Post.tags)).one_or_none()
     if post is None:
         raise NotFound
     return render_template('post/details.html', post=post)
+
 
 @post.route('/create/', methods=["GET", "POST"], endpoint="create")
 @login_required

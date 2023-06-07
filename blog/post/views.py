@@ -21,7 +21,7 @@ def post_list():
 @post.route('/apipost/', endpoint="listapi")
 def post_list():
     data = requests.get(
-        'http://127.0.0.1:5000/api/posts/?include=author%2Ctags&page%5Bnumber%5D=1&page%5Bsize%5D=10').text
+        'https://flask-blog-test-eq0q.onrender.com/api/posts/?include=author%2Ctags&page%5Bnumber%5D=1&page%5Bsize%5D=10').text
     return render_template('post/list_api.html', data=data)
 
 
